@@ -1,0 +1,126 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="./output.css" rel="stylesheet">
+  <script src="./weather.js"></script>
+  <link rel="icon" href="./favicon.ico">
+  <title>Weather Forcast website</title>
+</head>
+<body class="bg-blue-300 font-serif">
+  <header class="bg-blue-400 text-black p-4 text-center">
+    <h1 class="text-3xl font-bold">Weather Forecast</h1>
+    <p class="mt-2">Get the latest weather updates for your location.</p>
+    <p id="time" class="text-lg mt-2"></p>
+  </header>
+
+ <section class="flex flex-wrap gap-1 h-screen w-screen">
+
+<!-- input of city name -->
+  <div class="p-4 h-auto w-auto relative">
+  <form class="" onsubmit="return dis()">
+      <input
+      id="cityInput"
+        class="bg-blue-100 p-4 rounded-2xl pl-10 w-full shadow hover:shadow-lg hover:shadow-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        type="text"
+        placeholder="Enter city name"
+        onclick="input()"
+        required
+      >
+    <div id="historyMenu" class="absolute opacity-90 left-10 w-3xs bg-white rounded-2xl shadow mt-1 hidden z-10 p-4">
+    </div>
+    <input  type="submit" value="Get Weather"class="mt-5 bg-blue-400 text-white p-2 w-full shadow hover:shadow-blue-950">
+    <button id="locationBtn" type="button" class="mt-5 bg-blue-400 text-white p-2 w-full shadow hover:shadow-blue-950">
+      Use Current Location
+      <!-- navigator.geolocation.getCurrentPosition(successCallback); -->
+  </form>
+</div>
+
+  <div id="weatherInfo" class="p-4 w-4xl grid">
+    <div class="grid grid-cols-2  lg:grid-cols-5   gap-4">
+       <!-- main display of weatherForecast -->
+      <div class="bg-blue-100 col-span-2 lg:col-span-5 p-4 rounded-lg shadow">
+       <p class="text-2xl font-bold mb-2">Weather Information</p>
+        <p id="date" class="text-lg"></p> 
+        <p id="cityName" class="text-xl font-semibold"></p>
+        <div class="flex flex-wrap items-center justify-between">
+          <img id="weatherIcon" class="w-50 h-50 mt-2" src="" alt="Weather Icon">
+          <p id="temperature" class="text-6xl font-bold"></p> 
+          <p id="condition" class="text-lg"></p>
+        </div>
+        <div class="flex items-center justify-between mt-14">
+      
+        <p id="wind" class="text-lg"></p>
+        <p id="pressure" class="text-lg"></p>
+        <p id="humidity" class="text-lg"></p>
+        <p id="feelsLike" class="text-lg"></p>
+        </div>
+        
+      </div>
+      <!-- day1 -->
+      <div id="day1" class="bg-blue-100 p-4 rounded-lg shadow hover:bg-white transition duration-300">
+          <!-- Weather details will be populated here -->
+        <div class="flex flex-wrap item-center justify-between">
+        <p class=" text-sm font-semibold"></p>
+        <img class="w-20 h-20 mt-2" src="" alt="Weather Icon">
+        <p class="temp" class="text-2xl font-bold" ></p>
+        </div>
+      </div>
+
+        <div id="day2" class="bg-blue-100 p-4 rounded-lg shadow hover:bg-white transition duration-300">
+        <!-- Weather details will be populated here -->
+         <div class="flex flex-wrap item-center justify-between">
+        <p class="text-sm font-semibold"></p>
+        <img class="w-20 h-20 mt-2" src="" alt="Weather Icon">
+        <p class="temp" class="text-2xl font-bold" ></p>
+        </div>
+
+      </div>
+        <div id="day3" class="bg-blue-100 p-4 rounded-lg shadow hover:bg-white transition duration-300">
+        <!-- Weather details will be populated here -->
+         <div class="flex flex-wrap item-center justify-between">
+         <p class="text-sm font-semibold"></p>
+        <img class="w-20 h-20 mt-2" src="" alt="Weather Icon">
+        <p class="temp" class="text-2xl font-bold" ></p>
+        </div>
+
+      </div>
+        <div id="day4" class="bg-blue-100 p-4 rounded-lg shadow hover:bg-white transition duration-300">
+        <!-- Weather details will be populated here -->
+         <div class="flex flex-wrap item-center justify-between">
+         <p class="text-sm font-semibold"></p>
+        <img class="w-20 h-20 mt-2" src="" alt="Weather Icon">
+        <p class="temp" class="text-2xl font-bold" ></p>
+        </div>
+      </div>
+      <div id="day5" class=" bg-blue-100 p-4 rounded-lg shadow hover:bg-white transition duration-300">
+        <!-- Weather details will be populated here -->
+         <div class="flex flex-wrap item-center justify-between">
+         <p class="text-sm  font-semibold"></p>
+        <img class="w-20 h-20 mt-2" src="" alt="Weather Icon">
+        <p class="temp" class="text-2xl font-bold" ></p>
+        </div>
+      </div>
+
+    </div>
+
+</div>
+ </section>
+</body>
+<script>
+  function dateTime() {
+    const date = new Date();
+    const formattedDate = date.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+    document.getElementById('date').textContent = `${formattedDate}`;
+    document.getElementById('time').textContent = `${date.toLocaleTimeString()}`;
+  }
+  dateTime();
+  setInterval(dateTime, 1000);
+    
+</script>
+</html>
