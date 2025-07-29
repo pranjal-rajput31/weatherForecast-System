@@ -1,4 +1,4 @@
-//http://api.weatherapi.com/v1/forecast.json?key=de45430ea762468dbe670505252407&q=pune&days=5&aqi=yes&alerts=yes
+// this is weather api ----> http://api.weatherapi.com/v1/forecast.json?key=de45430ea762468dbe670505252407&q=pune&days=5&aqi=yes&alerts=yes
 
 //fetchdata function to get weather data from the API
 // This function fetches weather data for a given city and updates the HTML elements with the received data.
@@ -8,7 +8,7 @@ async function fetchdata(city) {
     const response = await fetch(
       `http://api.weatherapi.com/v1/forecast.json?key=de45430ea762468dbe670505252407&q=${city}&days=5&aqi=yes&alerts=yes`
     );
-// Check if the response is ok (status in the range 200-299)
+    // Check if the response is ok (status in the range 200-299)
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -19,7 +19,7 @@ async function fetchdata(city) {
     if (!data.location || !data.current || !data.current.condition) {
       throw new Error("Invalid data format received from API");
     }
-// Update the HTML elements with the fetched data
+    // Update the HTML elements with the fetched data
     document.getElementById("cityName").textContent = data.location.name;
     document.getElementById(
       "temperature"
@@ -63,11 +63,10 @@ async function fetchdata(city) {
     alert(`Failed to fetch weather data. Reason: ${error.message}`);
   }
 }
-
+//this function is used to take input from user and display appropriate details 
 function dis() {
   const city = document.getElementById("cityInput").value;
   if (/^[a-zA-Z\s]+$/.test(city)) {
-    // alert(`Weather for ${city} is being fetched...`);
     let history = JSON.parse(localStorage.getItem("cityHistory") || "[]");
     if (city && !history.includes(city)) {
       history.push(city);
@@ -82,6 +81,25 @@ function dis() {
   }
 }
 
+//navigation function
+
+function nav() {
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
+
+      // Now you can call the API using coordinates
+      fetchdata(`${lat},${lon}`);
+    },
+    (error) => {
+      console.error("Error:", error.message);
+      alert("Unable to get location.");
+    }
+  );
+}
+
+//dropDown menu
 function input() {
   const menu = document.getElementById("historyMenu");
   menu.innerHTML = "My History"; //
@@ -101,6 +119,7 @@ function input() {
   }
   menu.classList.remove("hidden");
 }
+//as soon as we click outside the drop down div its hidden
 document.addEventListener("click", function (e) {
   const input = document.getElementById("cityInput");
   const menu = document.getElementById("historyMenu");
@@ -108,5 +127,3 @@ document.addEventListener("click", function (e) {
     menu.classList.add("hidden");
   }
 });
-
-
