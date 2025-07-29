@@ -1,2 +1,2 @@
 # weatherForecast-System
-this project is all about monitoring the weather of different region with 5 days weather forecast prediction 
+This Project Is All About Monitoring The Weather Of Different Region With 5 Days Weather Forecast Prediction 
